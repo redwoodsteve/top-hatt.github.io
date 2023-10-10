@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Notepad</title>
-    <style>
-        #notepad {
-            width: 500px;
-            height: 500px;
-            padding: 10px;
-            border: 1px solid black;
-        }
-    </style>
+    <title>Notepad</title>
 </head>
 <body>
-    <h1>Simple Notepad</h1>
-    <textarea id="notepad"></textarea>
+
+<h2>Notepad</h2>
+
+<textarea id="notepad" rows="10" cols="50">
+Write something here...
+</textarea>
+
+<button onclick="download()">Download</button>
+
+<script>
+function download() {
+    var text = document.getElementById("notepad").value;
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', "notepad.txt");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+</script>
+
 </body>
 </html>
