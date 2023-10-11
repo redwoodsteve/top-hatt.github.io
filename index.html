@@ -13,6 +13,7 @@
         }
         h1 {
             text-align: center;
+            color: #333;
         }
         button {
             background-color: #4CAF50; /* Green */
@@ -26,13 +27,17 @@
             margin: 4px 2px;
             cursor: pointer;
         }
+        #password {
+            font-size: 20px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <h1>Strong Random Password Generator</h1>
+    <h1>Modern Strong Random Password Generator</h1>
     <button onclick="generatePassword()">Generate Password</button>
     <p id="password"></p>
-    <button onclick="window.location.href='check.html'">Check Password Strength</button>
+    <button onclick="copyPassword()">Copy Password</button>
 
     <script>
         function generatePassword() {
@@ -43,6 +48,12 @@
                 retVal += charset.charAt(Math.floor(Math.random() * n));
             }
             document.getElementById('password').innerText = retVal;
+        }
+
+        function copyPassword() {
+          var passwordText = document.getElementById('password');
+          navigator.clipboard.writeText(passwordText.innerText);
+          alert('Password copied to clipboard');
         }
     </script>
 </body>
