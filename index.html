@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple AI Chatbot</title>
+    <title>Random Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 50px;
+        }
+        #password {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Simple AI Chatbot</h1>
-    <input id="userInput" type="text" placeholder="Type something..." />
-    <button onclick="getResponse()">Submit</button>
-    <p id="chatbotResponse"></p>
+    <h1>Random Password Generator</h1>
+    <button id="generate">Generate Password</button>
+    <p id="password"></p>
 
     <script>
-        function getResponse() {
-            var input = document.getElementById('userInput').value;
-            document.getElementById('chatbotResponse').innerHTML = 'Chatbot: ' + input;
-        }
+        document.getElementById('generate').addEventListener('click', function() {
+            var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
+            var passwordLength = 16;
+            var password = '';
+            for (var i = 0; i <= passwordLength; i++) {
+                var randomNumber = Math.floor(Math.random() * chars.length);
+                password += chars.substring(randomNumber, randomNumber + 1);
+            }
+            document.getElementById('password').innerText = password;
+        });
     </script>
 </body>
 </html>
