@@ -1,49 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Random Password Generator</title>
     <style>
         body {
-            font-family: Comfortaa, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            padding: 50px;
         }
-        #password {
-            font-size: 24px;
-            font-weight: bold;
-            color: #333;
-            margin-top: 20px;
+        h1 {
+            text-align: center;
         }
         button {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #007BFF;
-            color: white;
+            background: linear-gradient(to right, #ff9966, #ff5e62);
             border: none;
-            border-radius: 5px;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
             cursor: pointer;
+            transition: background 0.5s ease;
         }
         button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(to right, #ff5e62, #ff9966);
         }
     </style>
 </head>
 <body>
-    <h1>Random Password Generator</h1>
-    <button id="generate">Generate Password</button>
+    <h1>Strong Random Password Generator</h1>
+    <button onclick="generatePassword()">Generate Password</button>
     <p id="password"></p>
 
     <script>
-        document.getElementById('generate').addEventListener('click', function() {
-            var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()';
-            var passwordLength = 16;
-            var password = '';
-            for (var i = 0; i <= passwordLength; i++) {
-                var randomNumber = Math.floor(Math.random() * chars.length);
-                password += chars.substring(randomNumber, randomNumber + 1);
+        function generatePassword() {
+            var length = 12,
+                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()",
+                retVal = "";
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * n));
             }
-            document.getElementById('password').innerText = password;
-        });
+            document.getElementById('password').innerText = retVal;
+        }
     </script>
 </body>
 </html>
