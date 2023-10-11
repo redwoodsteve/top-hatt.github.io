@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Simple Search Engine</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
 <body>
-
-<h2>Text to save:</h2>
-<textarea id="inputTextToSave" cols="60" rows="10"></textarea>
-<button onclick="saveTextAsFile()">Download</button>
-
-<script type='text/javascript'>
-function saveTextAsFile()
-{
-    var textToSave = document.getElementById("inputTextToSave").value;
-    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
-    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    var fileNameToSaveAs = prompt("Please enter the file name to save as");
-
-    var downloadLink = document.createElement("a");
-    downloadLink.download = fileNameToSaveAs;
-    downloadLink.innerHTML = "Download File";
-    downloadLink.href = textToSaveAsURL;
-    downloadLink.onclick = destroyClickedElement;
-    downloadLink.style.display = "none";
-    document.body.appendChild(downloadLink);
-
-    downloadLink.click();
-}
-
-function destroyClickedElement(event)
-{
-    document.body.removeChild(event.target);
-}
-</script>
-
+    <form action="https://www.google.com/search" method="get">
+        <input type="text" name="q" required>
+        <input type="submit" value="Search">
+    </form>
 </body>
 </html>
