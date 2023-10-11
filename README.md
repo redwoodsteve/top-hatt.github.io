@@ -1,2 +1,3 @@
 # top-hatt.github.io
-Simple Notepad
+Strong Password Generator
+Don't worry, we don't save the passwords.
