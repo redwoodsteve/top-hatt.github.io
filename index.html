@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
     <style>
         body {
             display: flex;
@@ -8,17 +9,20 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: Arial, sans-serif;
+            font-family: Comfortaa, Arial, sans-serif;
             background-color: #f0f0f0;
         }
         h1 {
             text-align: center;
             color: #333;
+            padding: 10px;
+            background-color: lightgrey;
+            border-radius: 5px;
         }
         button {
-            background-color: #4CAF50; /* Green */
+            background-color: lightgrey; /* Light Grey */
             border: none;
-            color: white;
+            color: black;
             padding: 15px 32px;
             text-align: center;
             text-decoration: none;
@@ -26,6 +30,11 @@
             font-size: 16px;
             margin: 4px 2px;
             cursor: pointer;
+            border-radius: 50px; /* Rounded buttons */
+            transition: transform .2s; /* Animation */
+        }
+        button:hover {
+          transform: scale(1.1); /* Slightly enlarge when hovered over */
         }
         #password {
             font-size: 20px;
