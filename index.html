@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Notepad</title>
-</head>
 <body>
 
-<h2>Notepad</h2>
+<h2>Text to save:</h2>
+<textarea id="inputTextToSave" cols="60" rows="10"></textarea>
+<button onclick="saveTextAsFile()">Download</button>
 
-<textarea id="notepad" rows="10" cols="50">
-Delete this text and write something here...
-</textarea>
+<script type='text/javascript'>
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("inputTextToSave").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = prompt("Please enter the file name to save as");
 
-<button onclick="download()">Download</button>
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
 
-<script>
-function download() {
-    var text = document.getElementById("notepad").value;
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', "notepad.txt");
+    downloadLink.click();
+}
 
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
 }
 </script>
 
