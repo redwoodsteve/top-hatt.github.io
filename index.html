@@ -1,47 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pretty Pixels</title>
+    <title>Typing Game</title>
     <style>
         body {
-            font-family: 'VT323', monospace;
+            font-family: 'Arial', sans-serif;
             background-color: #f0f0f0;
         }
-        #pixelCanvas {
-            width: 1000px;
-            height: 1000px;
-            border: 1px solid #ccc;
+        #sentence {
+            margin-bottom: 20px;
         }
-        .pixel {
-            width: 10px;
-            height: 10px;
-            float: left;
-            border: 1px solid #ccc;
+        #inputField {
+            width: 300px;
+            height: 30px;
+            font-size: 16px;
         }
-        .controls {
-            width: 200px;
-            float: left;
-            margin-right: 10px;
-        }
-        .controls div, button {
-            border-radius: 5px;
-            background-color: lightgrey;
-            margin-bottom: 10px;
-            padding: 10px;
+        #timer {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="controls">
-        <div id="colorPicker"></div>
-        <button id="clearButton">Clear</button>
-        <button id="undoButton">Undo</button>
-        <button id="redoButton">Redo</button>
-    </div>
-    <div id="pixelCanvas"></div>
+    <div id="sentence">The quick brown fox jumps over the lazy dog.</div>
+    <input id="inputField" type="text" />
+    <div id="timer">10</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@juggle/resize-observer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pickr-widget/dist/pickr.min.js"></script>
-    <script src="pixelArt.js"></script>
+    <script src="typingGame.js"></script>
 </body>
 </html>
