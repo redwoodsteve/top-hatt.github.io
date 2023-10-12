@@ -1,97 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Painting Pixels</title>
+    <title>Pretty Pixels</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'VT323', monospace;
             background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
         }
-        #canvas {
-            border: 1px solid black;
-            cursor: crosshair;
+        #pixelCanvas {
+            width: 1000px;
+            height: 1000px;
+            border: 1px solid #ccc;
         }
-        #color-picker, #clear-button, #undo-button, #redo-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 25px;
-            border: 1px solid black;
-            cursor: pointer;
+        .pixel {
+            width: 10px;
+            height: 10px;
+            float: left;
+            border: 1px solid #ccc;
+        }
+        .controls {
+            width: 200px;
+            float: left;
+            margin-right: 10px;
+        }
+        .controls div, button {
+            border-radius: 5px;
             background-color: lightgrey;
-            margin: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
         }
     </style>
 </head>
 <body>
-    <div style="text-align:center; padding:20px; background-color:#fff; border-radius:10px; margin:10px;">
-        <h1 style="border-radius:10px; padding:20px; background-color:#ddd;">Pretty Pixels</h1>
-        <div style="float:left; margin-right:10px;">
-            <input id="color-picker" type="color"><br/>
-            <button id="clear-button">Clear</button><br/>
-            <button id="undo-button">Undo</button><br/>
-            <button id="redo-button">Redo</button><br/>
-        </div>
-        <canvas id="canvas" width="1000" height="1000"></canvas><br/>
+    <div class="controls">
+        <div id="colorPicker"></div>
+        <button id="clearButton">Clear</button>
+        <button id="undoButton">Undo</button>
+        <button id="redoButton">Redo</button>
     </div>
+    <div id="pixelCanvas"></div>
 
-    <script>
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
-        var painting = false;
-        var colorPicker = document.getElementById('color-picker');
-        var clearButton = document.getElementById('clear-button');
-        var undoButton = document.getElementById('undo-button');
-        var redoButton = document.getElementById('redo-button');
-        var history = [];
-        var redoHistory = [];
-
-        canvas.addEventListener('mousedown', function(e) {
-            painting = true;
-            draw(e);
-        });
-
-        canvas.addEventListener('mouseup', function() {
-            painting = false;
-            ctx.beginPath();
-            history.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-            redoHistory = [];
-        });
-
-        canvas.addEventListener('mousemove', draw);
-
-        clearButton.addEventListener('click', function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            history.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-            redoHistory = [];
-        });
-
-        undoButton.addEventListener('click', function() {
-            if (history.length > 1) {
-                redoHistory.push(history.pop());
-                ctx.putImageData(history[history.length - 1], 0, 0);
-            }
-        });
-
-        redoButton.addEventListener('click', function() {
-            if (redoHistory.length > 0) {
-                history.push(redoHistory.pop());
-                ctx.putImageData(history[history.length - 1], 0, 0);
-            }
-        });
-
-        function draw(e) {
-            if (!painting) return;
-            ctx.lineWidth = 10;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = colorPicker.value;
-
-            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@juggle/resize-observer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pickr-widget/dist/pickr.min.js"></script>
+    <script src="pixelArt.js"></script>
 </body>
 </html>
