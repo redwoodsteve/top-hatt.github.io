@@ -1,2 +1,3 @@
-# top-hatt.github.io
-Advanced Calculator
+# Pretty Pixels!
+Draw on a pixelated board!
+
