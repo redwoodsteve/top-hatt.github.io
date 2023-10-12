@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href='https://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet'>
-    <style>
-        body {
-            display: flex;
-         <!DOCTYPE html>
-<html>
-<head>
 	<title>Advanced Calculator</title>
 	<style>
 		body {
@@ -162,65 +155,3 @@
         button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
             border:none!important
         }
-   flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Comfortaa, Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            padding: 10px;
-            background-color: lightgrey;
-            border-radius: 5px;
-        }
-        button {
-            background-color: lightgrey; /* Light Grey */
-            border: none;
-            color: black;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 50px; /* Rounded buttons */
-            transition: transform .2s; /* Animation */
-        }
-        button:hover {
-          transform: scale(1.1); /* Slightly enlarge when hovered over */
-        }
-        #password {
-            font-size: 20px;
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <h1>Strong Random Password Generator</h1>
-    <button onclick="generatePassword()">Generate Password</button>
-    <p id="password"></p>
-    <button onclick="copyPassword()">Copy Password</button>
-
-    <script>
-        function generatePassword() {
-            var length = 12,
-                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()",
-                retVal = "";
-            for (var i = 0, n = charset.length; i < length; ++i) {
-                retVal += charset.charAt(Math.floor(Math.random() * n));
-            }
-            document.getElementById('password').innerText = retVal;
-        }
-
-        function copyPassword() {
-          var passwordText = document.getElementById('password');
-          navigator.clipboard.writeText(passwordText.innerText);
-          alert('Password copied to clipboard');
-        }
-    </script>
-</body>
-</html>
