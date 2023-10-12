@@ -1,164 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Calculator</title>
-	<style>
-		body {
-			background-color: #f2f2f2;
-		}
-		.calculator {
-			background-color: #333;
-			border-radius: 10px;
-			padding: 20px;
-			margin: 20px auto;
-			max-width: 300px;
-			box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-		}
-		input[type=text] {
-			width: 100%;
-			height: 50px;
-			font-size: 24px;
-			border-radius: 5px;
-			border: none;
-			padding-left: 10px;
-			margin-bottom: 10px;
-		}
-		button {
-			width: 50px;
-			height: 50px;
-			font-size: 24px;
-			border-radius: 5px;
-			border: none;
-			margin-right: 5px;
-			margin-bottom: 5px;
-			background-color: #e6e6e6;
-			cursor: pointer;
-		}
-		button:hover {
-			transform: scale(1.1);
-		}
-		button.operator {
-			background-color: #ff8c00;
-			color: white;
-		}
-		button.clear {
-			background-color: #ff4d4d;
-			color: white;
-		}
-  		button:focus {
-  		  outline:none!important
-  		}
-  		button::-moz-focus-inner { /* remove extra button spacing in Firefox */
-  		  border:none!important
-  		}
-  		button:focus-visible{
-            outline:none!important
+    <title>Pretty Pixels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
         }
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
+        #canvas {
+            border: 1px solid black;
+            cursor: crosshair;
         }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
+        #color-picker {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            border: 1px solid black;
+            cursor: pointer;
         }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
-        
-        button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
-        }
+    </style>
+</head>
+<body>
+    <div style="text-align:center; padding:20px; background-color:#fff; border-radius:10px; margin:10px;">
+        <h1 style="border-radius:10px; padding:20px; background-color:#ddd;">Pretty Pixels</h1>
+        <canvas id="canvas" width="1000" height="1000"></canvas><br/>
+        <input id="color-picker" type="color">
+    </div>
 
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		
-  		button::-moz-focus-inner:focus-visible { /* remove extra button spacing in Firefox */
-            border:none!important
+    <script>
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var painting = false;
+        var colorPicker = document.getElementById('color-picker');
+
+        canvas.addEventListener('mousedown', function(e) {
+            painting = true;
+            draw(e);
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            painting = false;
+            ctx.beginPath();
+        });
+
+        canvas.addEventListener('mousemove', draw);
+
+        function draw(e) {
+            if (!painting) return;
+            ctx.lineWidth = 10;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = colorPicker.value;
+
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
         }
-
-  		button.operator:hover {
-  			transform:none !important; 
-  		}
-  		button.clear:hover {
-  			transform:none !important; 
-  		}
-  		button:hover {
-  			transform:none !important; 
-  		}
-
-  		button.equal:hover {
-  			transform:none !important; 
-  		}
-
-  		button.equal {
-  			background-color:#4CAF50; 
-  			color:white; 
-  			margin-right:0px !important; 
-  			width:auto !important; 
-  			font-size:30px !important; 
-  			padding-left:0 !important; 
-  			padding-right:0 !important; 
-  			border-radius:5px !important; 
-  			margin-bottom:10px !important; 
-  			box-shadow:none !important; 
-  			text-shadow:none !important; 
-  			cursor:pointer !important; 
-  			outline:none !important; 
-  			border:none !important; 
-  			height:auto !important; 
-  			line-height:normal !important; 
-  			padding-top:10px !important; 
-  			padding-bottom:10px !important; 
-  			display:block !important; 
-  			float:right !important;
+    </script>
+</body>
+</html>
