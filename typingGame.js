@@ -3,7 +3,7 @@ const sentences = [
     'How old is the kid?.',
     'Woah! That is amazing!',
     'The sun rises in the east.,
-    'I love reading books.',
+    'We love reading books.',
     'She is baking a cake.',
     'The dog is chasing its tail.',
     'It’s raining outside.',
