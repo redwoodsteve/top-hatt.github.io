@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Typing Game</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
-        }
-        #sentence {
-            margin-bottom: 20px;
-        }
-        #inputField {
-            width: 300px;
-            height: 30px;
-            font-size: 16px;
-        }
-        #timer {
-            margin-top: 20px;
-        }
-    </style>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+.bgimg-1 {
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bgimg-1 {
+  background-image: url('https://englishmountain.com/wp-content/uploads/2021/10/What-is-Pink-Cloud-Syndrome.jpg');
+  min-height: 100%;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+</style>
 </head>
 <body>
-    <div id="sentence">The quick brown fox jumps over the lazy dog.</div>
-    <input id="inputField" type="text" />
-    <div id="timer">10</div>
 
-    <script src="typingGame.js"></script>
+<div class="bgimg-1">
+  <div class="caption">
+    <span class="border">Cloud Parallax</span>
+  </div>
+</div>
+
 </body>
 </html>
