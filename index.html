@@ -1,45 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Calculator</title>
+    <title>PDF Viewer and Creator</title>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
 </head>
 <body>
-  <form>
-    <input type="text" id="result" readonly>
-    <br>
-    <input type="button" value="1" onclick="dis('1')">
-    <input type="button" value="2" onclick="dis('2')">
-    <input type="button" value="3" onclick="dis('3')">
-    <input type="button" value="+" onclick="dis('+')">
-    <br>
-    <input type="button" value="4" onclick="dis('4')">
-    <input type="button" value="5" onclick="dis('5')">
-    <input type="button" value="6" onclick="dis('6'); check()">
-    <input type="button" value="-" onclick="dis('-')">
-    <br>
-    <input type="button" value="7" onclick="dis('7')">
-    <input type="button" value="8" onclick="dis('8')">
-    <input type="button" value="9" onclick="dis('9')">
-    <input type="button" value="/" onclick="dis('/')">
-    <br>
-    <input type="button" value="0" onclick="dis('0')">
-    <input type="reset" value="Reset">
-  </form>
+    <h1>PDF Viewer</h1>
+    <canvas id="pdfViewer"></canvas>
 
-  <script>
-    let input = '';
-    
-    function dis(val) {
-      input += val;
-      document.getElementById("result").value = input;
-    }
+    <button onclick="window.location.href='createPdf.html'">Create PDF</button>
 
-    function check() {
-      if (input.endsWith("12")) {
-        window.location.href = "secretNotepad.html";
-      }
-    }
-  </script>
+    <script>
+        // Loading a pdf
+        var url = './path-to-your-pdf.pdf';
+        var pdfjsLib = window['pdfjs-dist/build/pdf'];
+
+        // The workerSrc property shall be specified.
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+
+        // Loading a document.
+        var loadingTask = pdfjsLib.getDocument(url);
+        loadingTask.promise.then(function(pdf) {
+            console.log('PDF loaded');
+
+            // Fetching the first page
+            var pageNumber = 1;
+            pdf.getPage(pageNumber).then(function(page) {
+                console.log('Page loaded');
+
+                var scale = 1.5;
+                var viewport = page.getViewport({scale: scale});
+
+                // Preparing canvas using PDF page dimensions
+                var canvas = document.getElementById('pdfViewer');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Rendering PDF page into canvas context
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                var renderTask = page.render(renderContext);
+                renderTask.promise.then(function () {
+                    console.log('Page rendered');
+                });
+            });
+        }, function (reason) {
+            console.error(reason);
+        });
+    </script>
 </body>
 </html>
