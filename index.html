@@ -1,31 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Base64 Encoding/Decoding</title>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
 </head>
 <body>
-    <h1>Base64 Encoding/Decoding</h1>
-    <form>
-        <label for="plaintext">Plaintext:</label><br>
-        <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea><br>
-        <label for="base64text">Base64-encoded Text:</label><br>
-        <textarea id="base64text" name="base64text" rows="4" cols="50"></textarea><br><br>
-        <button type="button" onclick="encode()">Encode</button>
-        <button type="button" onclick="decode()">Decode</button>
-    </form>
+  <form>
+    <input type="text" id="result" readonly>
+    <br>
+    <input type="button" value="1" onclick="dis('1')">
+    <input type="button" value="2" onclick="dis('2')">
+    <input type="button" value="3" onclick="dis('3')">
+    <input type="button" value="+" onclick="dis('+')">
+    <br>
+    <input type="button" value="4" onclick="dis('4')">
+    <input type="button" value="5" onclick="dis('5')">
+    <input type="button" value="6" onclick="dis('6'); check()">
+    <input type="button" value="-" onclick="dis('-')">
+    <br>
+    <input type="button" value="7" onclick="dis('7')">
+    <input type="button" value="8" onclick="dis('8')">
+    <input type="button" value="9" onclick="dis('9')">
+    <input type="button" value="/" onclick="dis('/')">
+    <br>
+    <input type="button" value="0" onclick="dis('0')">
+    <input type="reset" value="Reset">
+  </form>
 
-    <script type="text/javascript">
-        function encode() {
-            var plaintext = document.getElementById("plaintext").value;
-            var base64text = btoa(plaintext);
-            document.getElementById("base64text").value = base64text;
-        }
+  <script>
+    let input = '';
+    
+    function dis(val) {
+      input += val;
+      document.getElementById("result").value = input;
+    }
 
-        function decode() {
-            var base64text = document.getElementById("base64text").value;
-            var plaintext = atob(base64text);
-            document.getElementById("plaintext").value = plaintext;
-        }
-    </script>
+    function check() {
+      if (input.endsWith("263+")) {
+        window.location.href = "secret_notepad.html";
+      }
+    }
+  </script>
 </body>
 </html>
