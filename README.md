@@ -1,2 +1,2 @@
-# Typing Mania
+# PDF file and viewer!
 
