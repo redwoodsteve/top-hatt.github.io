@@ -1,52 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-body, html {
-  height: 100%;
-  margin: 0;
-  font: 400 15px/1.8 "Lato", sans-serif;
-  color: #777;
-}
-
-.bgimg-1 {
-  position: relative;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.bgimg-1 {
-  background-image: url('https://englishmountain.com/wp-content/uploads/2021/10/What-is-Pink-Cloud-Syndrome.jpg');
-  min-height: 100%;
-}
-
-.caption {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  text-align: center;
-  color: #000;
-}
-
-.caption span.border {
-  background-color: #111;
-  color: #fff;
-  padding: 18px;
-  font-size: 25px;
-  letter-spacing: 10px;
-}
-</style>
+    <title>Base64 Encoding/Decoding</title>
 </head>
 <body>
+    <h1>Base64 Encoding/Decoding</h1>
+    <form>
+        <label for="plaintext">Plaintext:</label><br>
+        <textarea id="plaintext" name="plaintext" rows="4" cols="50"></textarea><br>
+        <label for="base64text">Base64-encoded Text:</label><br>
+        <textarea id="base64text" name="base64text" rows="4" cols="50"></textarea><br><br>
+        <button type="button" onclick="encode()">Encode</button>
+        <button type="button" onclick="decode()">Decode</button>
+    </form>
 
-<div class="bgimg-1">
-  <div class="caption">
-    <span class="border">Cloud Parallax</span>
-  </div>
-</div>
+    <script type="text/javascript">
+        function encode() {
+            var plaintext = document.getElementById("plaintext").value;
+            var base64text = btoa(plaintext);
+            document.getElementById("base64text").value = base64text;
+        }
 
+        function decode() {
+            var base64text = document.getElementById("base64text").value;
+            var plaintext = atob(base64text);
+            document.getElementById("plaintext").value = plaintext;
+        }
+    </script>
 </body>
 </html>
