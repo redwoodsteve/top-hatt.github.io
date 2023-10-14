@@ -1,56 +1,69 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>PDF Viewer and Creator</title>
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notepad</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .rounded-box {
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4caf50;
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <h1>PDF Viewer</h1>
-    <canvas id="pdfViewer"></canvas>
+  <div class="rounded-box">
+    <h2>Notepad</h2>
+    <textarea id="inputText" placeholder="Type something here..."></textarea>
+    <br>
+    <a class="download-btn" onclick="downloadAsPDF()">Download as PDF</a>
+    <a class="download-btn" onclick="downloadAsTXT()">Download as TXT</a>
+  </div>
 
-    <button onclick="window.location.href='createPdf.html'">Create PDF</button>
+  <script>
+    function downloadAsPDF() {
+      // Implement PDF download logic here
+      alert("PDF download functionality coming soon!");
+    }
 
-    <script>
-        // Loading a pdf
-        var url = './path-to-your-pdf.pdf';
-        var pdfjsLib = window['pdfjs-dist/build/pdf'];
-
-        // The workerSrc property shall be specified.
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
-
-        // Loading a document.
-        var loadingTask = pdfjsLib.getDocument(url);
-        loadingTask.promise.then(function(pdf) {
-            console.log('PDF loaded');
-
-            // Fetching the first page
-            var pageNumber = 1;
-            pdf.getPage(pageNumber).then(function(page) {
-                console.log('Page loaded');
-
-                var scale = 1.5;
-                var viewport = page.getViewport({scale: scale});
-
-                // Preparing canvas using PDF page dimensions
-                var canvas = document.getElementById('pdfViewer');
-                var context = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-
-                // Rendering PDF page into canvas context
-                var renderContext = {
-                    canvasContext: context,
-                    viewport: viewport
-                };
-                var renderTask = page.render(renderContext);
-                renderTask.promise.then(function () {
-                    console.log('Page rendered');
-                });
-            });
-        }, function (reason) {
-            console.error(reason);
-        });
-    </script>
+    function downloadAsTXT() {
+      var textToDownload = document.getElementById("inputText").value;
+      var blob = new Blob([textToDownload], { type: "text/plain" });
+      var link = document.createElement("a");
+      link.download = "download.txt";
+      link.href = window.URL.createObjectURL(blob);
+      link.click();
+    }
+  </script>
 </body>
 </html>
