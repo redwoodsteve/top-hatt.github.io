@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notepad</title>
+  <title>Your Rounded Box Website</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -43,17 +43,27 @@
 </head>
 <body>
   <div class="rounded-box">
-    <h2>Notepad</h2>
+    <h2>Your Rounded Box Website</h2>
     <textarea id="inputText" placeholder="Type something here..."></textarea>
     <br>
     <a class="download-btn" onclick="downloadAsPDF()">Download as PDF</a>
     <a class="download-btn" onclick="downloadAsTXT()">Download as TXT</a>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
   <script>
     function downloadAsPDF() {
-      // Implement PDF download logic here
-      alert("PDF download functionality coming soon!");
+      var textToDownload = document.getElementById("inputText").value;
+
+      // Initialize jsPDF
+      var pdf = new jsPDF();
+
+      // Add text to PDF
+      pdf.text(textToDownload, 20, 20);
+
+      // Save the PDF
+      pdf.save("download.pdf");
     }
 
     function downloadAsTXT() {
