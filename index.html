@@ -1,100 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-        }
-        canvas {
-            border: 1px solid black;
-        }
-        button {
-            margin: 5px;
-        }
-    </style>
+    <title>Yuh</title>
 </head>
 <body>
-    <canvas id="canvas" width="500" height="500"></canvas>
-    <div>
-        <button id="undo">Undo</button>
-        <button id="redo">Redo</button>
-        <button id="clear">Clear</button>
-    </div>
+    <h1>yuh</h1>
+    <p>yuh</p>
 
-    <script>
-        let canvas = document.getElementById('canvas');
-        let ctx = canvas.getContext('2d');
-        let painting = false;
-        let paths = [];
-        let redoPaths = [];
-
-        function startDraw(e) {
-            painting = true;
-            draw(e);
-            paths.push([]);
-        }
-
-        function endDraw() {
-            painting = false;
-            ctx.beginPath();
-        }
-
-        function draw(e) {
-            if (!painting) return;
-            ctx.lineWidth = 10;
-            ctx.lineCap = 'round';
-            ctx.strokeStyle = 'black';
-
-            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-            paths[paths.length - 1].push({ x: e.clientX - canvas.offsetLeft, y: e.clientY - canvas.offsetTop });
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-        }
-
-        function undoLast() {
-            if (paths.length === 0) return;
-            redoPaths.push(paths.pop());
-            redrawCanvas();
-        }
-
-        function redoLast() {
-            if (redoPaths.length === 0) return;
-            paths.push(redoPaths.pop());
-            redrawCanvas();
-        }
-
-        function clearCanvas() {
-            paths = [];
-            redoPaths = [];
-            redrawCanvas();
-        }
-
-        function redrawCanvas() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            paths.forEach(path => {
-                ctx.beginPath();
-                path.forEach(point => {
-                    ctx.lineTo(point.x, point.y);
-                    ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(point.x, point.y);
-                });
-                ctx.beginPath(); // Reset the path
-            });
-        }
-
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mouseup', endDraw);
-        canvas.addEventListener('mousemove', draw);
-
-        document.getElementById('undo').addEventListener('click', undoLast);
-        document.getElementById('redo').addEventListener('click', redoLast);
-        document.getElementById('clear').addEventListener('click', clearCanvas);
-    </script>
+    <!-- Replace 'https://www.example.com' with the URL of the website you want to embed -->
+    <iframe src="https://www.youtube.com/watch?v=o41B3B25f3Q" width="100%" height="500px">
+        <!-- This text will be displayed if the user's browser does not support iframes -->
+        <p>Your browser does not support iframes. Yuh.</p>
+    </iframe>
 </body>
 </html>
